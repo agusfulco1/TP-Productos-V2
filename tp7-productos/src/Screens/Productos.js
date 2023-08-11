@@ -1,4 +1,4 @@
-
+import axios from 'axios'
 
 export default function Productos() {
     const inputProducto = document.getElementById("producto");
