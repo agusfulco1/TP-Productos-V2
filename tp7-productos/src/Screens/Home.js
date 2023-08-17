@@ -1,42 +1,79 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
+import '../Styles/Home.css'
+import Carousel from 'react-bootstrap/Carousel';
+import gato from '../Img/gato.jfif';
 
 export default function Home() {
     const [productos, setProductos] = useState([])
-    const [producto, setProducto] = useState()
+    const [destacados, setDestacados] = useState([])
     const randomNumberInRange = (min, max) => {
         return Math.floor(Math.random()
             * (max - min + 1)) + min;
     };
     useEffect(() => {
         axios.get("https://dummyjson.com/products")
-        .then((response) => setProductos(response.data))
-        for (let index = 0; index < 6; index++) {
-            let num
-            num = randomNumberInRange(1, productos.length);
-            setProducto(productos[num])
-        }
+            .then((response) => {
+                const prods = response.data.products;
+                setProductos(prods);
+                let destacadosArray = [];
+                for (let index = 0; index < 6; index++) {
+                    let num
+                    num = randomNumberInRange(1, prods.length);
+                    destacadosArray.push(prods[num]);
+                    console.log(destacadosArray)
+                }
+                setDestacados(destacadosArray);
+            });
     }, [])
     return (
         <div>
-            {productos.map((element) => {
+            {destacados.map((element) => {
                 return (
-                    <Card style={{ width: "18rem" }}>
-                        <Card.Img variant="top" src="holder.js/100px180" />
-                        <Card.Body>
-                            <Card.Title>{element.title}</Card.Title>
-                            <Card.Text>
-                                Some quick example text to build on the card title and make up the
-                                bulk of the card's content.
-                            </Card.Text>
-                            <Button variant="primary">Go somewhere</Button>
-                        </Card.Body>
-                    </Card>
+                    <>
+                        <Row md={3} key={element.brand}>
+                            <Card style={{ width: "18rem" }}>
+                                <Card.Img variant="top" src={element.thumbnail} />
+                                <Card.Body>
+                                    <Card.Title>{element.title}</Card.Title>
+                                    <Card.Text>
+                                        {element.description}
+                                    </Card.Text>
+                                    <Button variant="primary">Go somewhere</Button>
+                                </Card.Body>
+                            </Card>
+                        </Row>
+                    </>
                 )
             })}
-
+            <Carousel  className='Carousel'>
+                <Carousel.Item >
+                    <img src={gato} alt='hola' />
+                    <Carousel.Caption>
+                        <h3>First slide label</h3>
+                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                    </Carousel.Caption>
+                </Carousel.Item>
+                <Carousel.Item>
+                    <img src={gato} alt='hola' />
+                    <Carousel.Caption>
+                        <h3>Second slide label</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    </Carousel.Caption>
+                </Carousel.Item>
+                <Carousel.Item>
+                    <img src={gato} alt='hola' />
+                    <Carousel.Caption>
+                        <h3>Third slide label</h3>
+                        <p>
+                            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+                        </p>
+                    </Carousel.Caption>
+                </Carousel.Item>
+            </Carousel>
         </div>
     );
 }

@@ -1,21 +1,24 @@
 import axios from 'axios'
-
+import { useState } from 'react';
+import '../Styles/Productos.css'
 export default function Productos() {
-    const inputProducto = document.getElementById("producto");
-    inputProducto.onkeyup = () => {
-        if (inputProducto.value != "") {
+    const [textoABuscar, setTextoABuscar] = useState('');
+
+    const handleKeyUp = (e) => {
+        setTextoABuscar(e.target.value);
+        /*if (inputProducto.value != "") {
             boton = document.getElementById("boton");
             boton.classList.remove("disabled")
         }
         else {
             boton.classList.add("disabled")
-        }
+        }*/
     }
 
-    document.getElementById("boton").onclick = () => {
-        const listaProductos = document.getElementById("listaProductos")
-        listaProductos.innerHTML = ""
-        axios.get(`https://dummyjson.com/products/search?q=${inputProducto.value}`)
+    const BuscarProducto = () => {
+        //const listaProductos = document.getElementById("listaProductos")
+        //listaProductos.innerHTML = ""
+        /*axios.get(`https://dummyjson.com/products/search?q=${inputProducto.value}`)
             .then(function (response) {
                 response.data.products.forEach(element => {
 
@@ -33,11 +36,10 @@ export default function Productos() {
                     listaProductos.appendChild(productos);
                 });
 
-            })
+            })*/
     }
     return (
         <div>
-
             <header class="masthead">
                 <div class="container position-relative">
                     <div class="row justify-content-center">
@@ -49,9 +51,9 @@ export default function Productos() {
 
                                 <div class="row">
                                     <div class="col">
-                                        <input class="form-control form-control-lg" id="producto" type="email" placeholder="Producto..." />
+                                        <input class="form-control form-control-lg" onKeyUp={handleKeyUp} type="email" placeholder="Producto..." />
                                     </div>
-                                    <div class="col-auto"><button class="btn btn-primary btn-lg disabled" id="boton" type="submit">Buscar</button></div>
+                                    <div class="col-auto"><button class={ 'btn btn-primary btn-lg ' + ( textoABuscar === '' ?  'disabled' : '' ) } onClick={BuscarProducto} type="submit">Buscar</button></div>
                                 </div>
 
 
