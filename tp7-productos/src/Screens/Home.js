@@ -6,9 +6,9 @@ import Card from 'react-bootstrap/Card';
 import '../Styles/Home.css'
 import Carousel from 'react-bootstrap/Carousel';
 import gato from '../Img/gato.jfif';
+import Col from 'react-bootstrap/Col';
 
 export default function Home() {
-    const [productos, setProductos] = useState([])
     const [destacados, setDestacados] = useState([])
     const randomNumberInRange = (min, max) => {
         return Math.floor(Math.random()
@@ -18,7 +18,6 @@ export default function Home() {
         axios.get("https://dummyjson.com/products")
             .then((response) => {
                 const prods = response.data.products;
-                setProductos(prods);
                 let destacadosArray = [];
                 for (let index = 0; index < 6; index++) {
                     let num
@@ -31,25 +30,25 @@ export default function Home() {
     }, [])
     return (
         <div>
-            {destacados.map((element) => {
-                return (
-                    <>
-                        <Row md={3} key={element.brand}>
-                            <Card style={{ width: "18rem" }}>
-                                <Card.Img variant="top" src={element.thumbnail} />
-                                <Card.Body>
-                                    <Card.Title>{element.title}</Card.Title>
-                                    <Card.Text>
-                                        {element.description}
-                                    </Card.Text>
-                                    <Button variant="primary">Go somewhere</Button>
-                                </Card.Body>
-                            </Card>
-                        </Row>
-                    </>
-                )
-            })}
-            <Carousel  className='Carousel'>
+            <Row md={4}>
+                {destacados.map((element) => {
+                    return (
+                        <Col>
+                        <Card style={{ width: "18rem"}}>
+                            <Card.Img variant="top" src={element.thumbnail} style={{ height: "150px"}}/>
+                            <Card.Body>
+                                <Card.Title>{element.title}</Card.Title>
+                                <Card.Text>
+                                    {element.price} $
+                                </Card.Text>
+                                <Button variant="primary">Comprar</Button>
+                            </Card.Body>
+                        </Card>
+                        </Col>
+                    )
+                })}
+            </Row>
+            <Carousel className='Carousel'>
                 <Carousel.Item >
                     <img src={gato} alt='hola' />
                     <Carousel.Caption>
@@ -75,5 +74,7 @@ export default function Home() {
                 </Carousel.Item>
             </Carousel>
         </div>
+
+
     );
 }
