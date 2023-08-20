@@ -1,33 +1,34 @@
 import axios from 'axios'
 import { useState } from 'react';
 import '../Styles/Productos.css'
+import Row from 'react-bootstrap/Row';
+import { Link } from 'react-router-dom'
 export default function Productos() {
     const [textoABuscar, setTextoABuscar] = useState('');
-    const [listaProductos, setListaProductos] = useState('')
     const [productos, setProductos] = useState([])
+    const [isLoading, setLoading] = useState(true)
+
     const handleKeyUp = (e) => {
         setTextoABuscar(e.target.value);
     }
 
     const BuscarProducto = () => {
-        console.log()
         axios.get(`https://dummyjson.com/products/search?q=${textoABuscar}`)
             .then(function (response) {
-                console.log(response.data.products)
-                response.data.products.forEach(element => {
-                    setProductos(
-                        ...productos,
-                        {
-                            element
-                        }
-                    )
-                    setListaProductos(productos)
+                const listaProductos = response.data.products
+                let productosArray = []
+                listaProductos.forEach(element => {
+                    productosArray.push(element)
+                    console.log(productosArray)
                 });
+                setProductos(productosArray)
             })
-            .finally(() => console.log(listaProductos))
+            .finally(() => {
+                setLoading(false)
+            })
     }
     return (
-        <div>
+        <div className='box2'>
             <header className="masthead">
                 <div className="container position-relative">
                     <div className="row justify-content-center">
@@ -46,18 +47,24 @@ export default function Productos() {
                 </div>
             </header>
 
-            <div className="row" id="listaProductos">
-                {listaProductos.lenght > 0 ? (listaProductos.map((element) => {
-                    return (
-                    <div id="producto" className="card">
-                        <img id="imagenProducto" src={productos.thumbnail} height="250px" width="auto" className="card-img-top" />
-                        <div className="card-body">
-                            <h5 id="tituloProducto" className="card-title">{productos.title}</h5>
-                            <button id="botonVerMas" className="btn btn-success" /*onclick={verMas(productos.id)}*/ data-bs-toggle="modal" data-bs-target="#exampleModal">Ver mas</button>
-                        </div>
-                    </div>
-                    )
-                })  ) : null}
+            <div id="listaProductos">
+                <Row md={4}>
+                    {isLoading ? null : (productos.map((element) => {
+                        return (
+                            <div className='col'>
+                                <div key={element.id} className="card objeto">
+                                    <img id="imagenProducto" alt='god' src={element.thumbnail} height="250px" width="auto" className="card-img-top" />
+                                    <div className="card-body">
+                                        <h5 id="tituloProducto" className="card-title">{element.title}</h5>
+                                        <Link to={'/Detalle/' + element.id} className="btn btn-success">Ver Mas</Link>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        )
+                    }))}
+                </Row>
             </div>
 
 
@@ -83,32 +90,6 @@ export default function Productos() {
                     </div>
                 </div>
             </div>
-
-            <footer className="footer bg-light">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-6 h-100 text-center text-lg-start my-auto">
-                            <ul className="list-inline mb-2">
-                                <li className="list-inline-item"><a href="#!">About</a></li>
-                                <li className="list-inline-item">⋅</li>
-                                <li className="list-inline-item"><a href="#!">Contact</a></li>
-                                <li className="list-inline-item">⋅</li>
-                                <li className="list-inline-item"><a href="#!">Terms of Use</a></li>
-                                <li className="list-inline-item">⋅</li>
-                                <li className="list-inline-item"><a href="#!">Privacy Policy</a></li>
-                            </ul>
-                            <p className="text-muted small mb-4 mb-lg-0">&copy;Tiago Glusman - Agustin Fulco</p>
-                        </div>
-                        <div className="col-lg-6 h-100 text-center text-lg-end my-auto">
-                            <ul className="list-inline mb-0">
-                                <li className="list-inline-item">
-                                    <a href="https://github.com/teglus133/TP3---JS"><i className="bi-github fs-3"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </footer>
         </div>
     );
 
