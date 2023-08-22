@@ -9,6 +9,7 @@ import foto1 from '../Img/bg-showcase-1.jpg'
 import foto2 from '../Img/bg-showcase-2.jpg'
 import foto3 from '../Img/Gato.jpg'
 import Col from 'react-bootstrap/Col';
+import { Link } from 'react-router-dom'
 
 export default function Home() {
     const [destacados, setDestacados] = useState([])
@@ -76,7 +77,7 @@ export default function Home() {
                                                     <h1 className='precioConDescuento'>{element.price}$</h1>
                                                     <h1>&nbsp;{calcularDescuento(element)}$</h1>
                                                 </Card.Text>
-                                                <Button variant="primary">Comprar</Button>
+                                                <Link to={'/Detalle/' + element.id} className="btn btn-success">Ver Mas</Link>
                                             </Card.Body>
                                         </Card>
                                     </Col>
