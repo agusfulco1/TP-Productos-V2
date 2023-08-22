@@ -20,3 +20,10 @@
     color: rgb(171, 171, 171);
     text-decoration-line: line-through;
 }
+.verticalLine {
+    border-left: 1px solid #9b9b9b;
+    margin-left: 5px;
+    margin-right: 5px;
+    height: 370px;
+    vertical-align: center;
+}

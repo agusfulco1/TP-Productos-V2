@@ -29,14 +29,15 @@ export default function DetalleProductos() {
             {isLoading ? null : (
                 <>
                 <div className='box'>
-                    <div >
+                    <div>
                         <img src={producto.thumbnail} height="400px"alt='god'/>
                     </div>
+                    <hr className='verticalLine' />
                     <div>
                         <h1>{producto.title}</h1>
                         <h1>{producto.description}</h1>
                         <div className='precios'>
-                            <h1 className='precioConDescuento'>  {producto.price} $</h1>
+                            <h1 className='precioConDescuento'>{producto.price} $</h1>
                             <h1>&nbsp;{calcularDescuento()}$</h1>
                         </div>
                         <div>

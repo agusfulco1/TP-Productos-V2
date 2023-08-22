@@ -33,6 +33,14 @@ export default function Home() {
                 setLoading(false)
             })
     }, [])
+
+    const calcularDescuento = (producto)  => {
+        let precio = producto.price
+        let discount = producto.discountPercentage
+        const precioConDescuento = (Math.round(precio - (precio * discount/100)))
+        return precioConDescuento
+    }
+
     return (
         <div>
             {isLoading ? null : (
@@ -64,8 +72,9 @@ export default function Home() {
                                             {element.thumbnail == null ? <h1>No hay imagen</h1> : <Card.Img variant="top" src={element.thumbnail} style={{ height: "150px" }} />}
                                             <Card.Body>
                                                 <Card.Title>{element.title}</Card.Title>
-                                                <Card.Text>
-                                                    {element.price} $
+                                                <Card.Text className='precios'>
+                                                    <h1 className='precioConDescuento'>{element.price}$</h1>
+                                                    <h1>&nbsp;{calcularDescuento(element)}$</h1>
                                                 </Card.Text>
                                                 <Button variant="primary">Comprar</Button>
                                             </Card.Body>
