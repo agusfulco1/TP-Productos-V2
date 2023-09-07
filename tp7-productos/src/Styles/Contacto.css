@@ -12,3 +12,20 @@ input {
 input:focus {
     outline-width: 0;
 }
+.containerInput {
+    margin-left: 10px;
+}
+.boton {
+    padding: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    width: 200px;
+    background-color: #314ce9;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    border: none;
+}
+.boton:focus {
+    border: none;
+}

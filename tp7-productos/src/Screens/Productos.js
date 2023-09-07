@@ -3,6 +3,7 @@ import { useState } from 'react';
 import '../Styles/Productos.css'
 import Row from 'react-bootstrap/Row';
 import { Link } from 'react-router-dom'
+import Producto from '../Components/Producto';
 export default function Productos() {
     const [textoABuscar, setTextoABuscar] = useState('');
     const [productos, setProductos] = useState([])
@@ -11,7 +12,12 @@ export default function Productos() {
     const handleKeyUp = (e) => {
         setTextoABuscar(e.target.value);
     }
-
+    const calcularDescuento = (producto)  => {
+        let precio = producto.price
+        let discount = producto.discountPercentage
+        const precioConDescuento = (Math.round(precio - (precio * discount/100)))
+        return precioConDescuento
+    }
     const BuscarProducto = () => {
         axios.get(`https://dummyjson.com/products/search?q=${textoABuscar}`)
             .then(function (response) {
@@ -28,7 +34,7 @@ export default function Productos() {
             })
     }
     return (
-        <div className='box2'>
+        <div className='box3'>
             <header className="masthead">
                 <div className="container position-relative">
                     <div className="row justify-content-center">
@@ -47,21 +53,11 @@ export default function Productos() {
                 </div>
             </header>
 
-            <div id="listaProductos">
-                <Row md={4}>
+            <div className='container'>
+                <Row md={4} style={{marginTop: 10}}>
                     {isLoading ? null : (productos.map((element) => {
                         return (
-                            <div className='col'>
-                                <div key={element.id} className="card objeto">
-                                    <img id="imagenProducto" alt='god' src={element.thumbnail} height="250px" width="auto" className="card-img-top" />
-                                    <div className="card-body">
-                                        <h5 id="tituloProducto" className="card-title">{element.title}</h5>
-                                        <Link to={'/Detalle/' + element.id} className="btn btn-success">Ver Mas</Link>
-
-                                    </div>
-                                </div>
-                            </div>
-
+                            <Producto titulo={element.title} id={element.id} imagen={element.thumbnail} precio={element.price} producto={element} calcularDescuento={calcularDescuento}></Producto>
                         )
                     }))}
                 </Row>

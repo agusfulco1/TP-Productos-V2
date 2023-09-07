@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
-import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Card from 'react-bootstrap/Card';
 import '../Styles/Home.css'
@@ -10,7 +9,7 @@ import foto2 from '../Img/bg-showcase-2.jpg'
 import foto3 from '../Img/Gato.jpg'
 import Col from 'react-bootstrap/Col';
 import { Link } from 'react-router-dom'
-
+import Producto from '../Components/Producto';
 export default function Home() {
     const [destacados, setDestacados] = useState([])
     const [isLoading, setLoading] = useState(true)
@@ -65,21 +64,11 @@ export default function Home() {
                     </div>
 
                     <div className='container'>
-                        <Row style={{ marginLeft: 10 }} md={3}>
+                        <Row md={3}>
                             {destacados.map((element) => {
                                 return (
                                     <Col>
-                                        <Card className='producto' style={{ width: "18rem" }} key={element.id}>
-                                            {element.thumbnail == null ? <h1>No hay imagen</h1> : <Card.Img variant="top" src={element.thumbnail} style={{ height: "150px" }} />}
-                                            <Card.Body>
-                                                <Card.Title>{element.title}</Card.Title>
-                                                <Card.Text className='precios'>
-                                                    <h1 className='precioConDescuento'>{element.price}$</h1>
-                                                    <h1>&nbsp;{calcularDescuento(element)}$</h1>
-                                                </Card.Text>
-                                                <Link to={'/Detalle/' + element.id} className="btn btn-success">Ver Mas</Link>
-                                            </Card.Body>
-                                        </Card>
+                                        <Producto titulo={element.title} id={element.id} imagen={element.thumbnail} precio={element.price} producto={element} calcularDescuento={calcularDescuento}></Producto>
                                     </Col>
                                 )
                             })}

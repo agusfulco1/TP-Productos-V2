@@ -1,0 +1,11 @@
+.containerProductos {
+    width: 90%;
+    background-color: red;
+    height: 700px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-color: rgb(245, 245, 245);
+    margin-bottom: 15px;
+}
+.box2 {
+    margin-left: 70px;
+}

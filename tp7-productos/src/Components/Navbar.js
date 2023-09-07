@@ -9,13 +9,13 @@ export default function NavBar() {
             <div className='navbar'>
                 <Navbar expand="lg" className="">
                     <div className='container-fluid'>
-                        <Navbar.Brand href="#home">Techglus</Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="me-auto">
                                 <Nav.Link as={Link} to="/" >Home</Nav.Link>
                                 <Nav.Link as={Link} to="/productos">Productos</Nav.Link>
                                 <Nav.Link as={Link} to="/contacto">Contacto</Nav.Link>
+                                <Nav.Link as={Link} to="/carrito">Carrito</Nav.Link>
                             </Nav>
                         </Navbar.Collapse>
                     </div>

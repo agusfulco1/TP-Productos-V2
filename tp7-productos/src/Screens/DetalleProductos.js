@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react';
 import '../Styles/DetalleProducto.css'
 import {AiOutlineStar} from 'react-icons/ai'
-
+import Button from '../Components/Button';
 export default function DetalleProductos() {
     const [producto, setProducto] = useState()
     const [isLoading, setLoading] = useState(true)
@@ -33,22 +33,26 @@ export default function DetalleProductos() {
                         <img src={producto.thumbnail} height="400px"alt='god'/>
                     </div>
                     <hr className='verticalLine' />
-                    <div>
-                        <h1>{producto.title}</h1>
-                        <h1>{producto.description}</h1>
+                    <div className='containerTexto'>
+                        <h2>{producto.title}</h2>
+                        <h2>{producto.description}</h2>
                         <div className='precios'>
-                            <h1 className='precioConDescuento'>{producto.price} $</h1>
-                            <h1>&nbsp;{calcularDescuento()}$</h1>
+                            <h2 className='precioConDescuento'>{producto.price} $</h2>
+                            <h2>&nbsp;{calcularDescuento()}$</h2>
                         </div>
                         <div>
-                            <h1>Rating: {producto.rating} <AiOutlineStar /></h1>
+                            <h2>Rating: {producto.rating} <AiOutlineStar /></h2>
+                        </div>
+                        <h2>Quedan: {producto.stock} Unidades</h2>
+                        <div className='botones'>
+                            <Button titulo={"Comprar"}></Button>
+                            <Button titulo={"Agregar al carrito"}></Button>
                         </div>
                         
-                        <h1>Quedan: {producto.stock} Unidades</h1>
                     </div>
                 </div>
                 <div>
-                    <h1>Otras imagenes</h1>
+                    <h2>Otras imagenes</h2>
                     <div className='imagenes row-md-3'>
                         {Array.isArray(producto.images) &&
                             producto.images.length > 0 ? (
