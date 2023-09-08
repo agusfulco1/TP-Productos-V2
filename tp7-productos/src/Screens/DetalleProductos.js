@@ -1,27 +1,37 @@
 import { useParams } from 'react-router-dom';
 import axios from 'axios'
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import '../Styles/DetalleProducto.css'
 import {AiOutlineStar} from 'react-icons/ai'
 import Button from '../Components/Button';
+import { CarritoContext } from '../Context/carritoContext';
 export default function DetalleProductos() {
     const [producto, setProducto] = useState()
     const [isLoading, setLoading] = useState(true)
 
     const { idProducto } = useParams();
+
+    const ObjetoCarrito = useContext(CarritoContext)
+
     useEffect(() => {
         axios.get('https://dummyjson.com/products/' + idProducto)
         .then(function (response) {
-            setProducto(response.data)
-            console.log(response.data)
+            setProducto(response.data) 
         })
         .finally(() => setLoading(false))
     }, [])
+
     const calcularDescuento = ()  => {
         let precio = producto.price
         let discount = producto.discountPercentage
         const precioConDescuento = (Math.round(precio - (precio * discount/100)))
         return precioConDescuento
+    }
+
+    const AgregarAlCarrito = () => {
+        console.log(producto)
+        ObjetoCarrito.setCarrito(producto)
+        console.log(ObjetoCarrito)
     }
     return (
 
@@ -46,7 +56,7 @@ export default function DetalleProductos() {
                         <h2>Quedan: {producto.stock} Unidades</h2>
                         <div className='botones'>
                             <Button titulo={"Comprar"}></Button>
-                            <Button titulo={"Agregar al carrito"}></Button>
+                            <Button titulo={"Agregar al carrito"} onPress={AgregarAlCarrito}></Button>
                         </div>
                         
                     </div>
