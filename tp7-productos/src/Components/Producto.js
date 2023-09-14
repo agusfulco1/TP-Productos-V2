@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom'
 import '../Styles/Home.css'
 import Card from 'react-bootstrap/Card';
 export default function Producto(props) {
-    console.log(props)
     return (
         <Card className='producto' style={{ width: "18rem" }} key={props.id}>
             {props.imagen == null ? <h1>No hay imagen</h1> : <Card.Img variant="top" src={props.imagen} style={{ height: "150px" }} />}

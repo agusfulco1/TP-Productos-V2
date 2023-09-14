@@ -9,3 +9,13 @@
 .box2 {
     margin-left: 70px;
 }
+
+.containerCarrito {
+    margin-top: 10px;
+    border: 1px solid black;
+    height: 25%;
+}
+.imagenProducto {
+    height: 173px;
+    width: 20%;
+}

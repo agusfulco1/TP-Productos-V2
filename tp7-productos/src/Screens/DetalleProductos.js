@@ -5,6 +5,8 @@ import '../Styles/DetalleProducto.css'
 import {AiOutlineStar} from 'react-icons/ai'
 import Button from '../Components/Button';
 import { CarritoContext } from '../Context/carritoContext';
+import { Link } from 'react-router-dom'
+
 export default function DetalleProductos() {
     const [producto, setProducto] = useState()
     const [isLoading, setLoading] = useState(true)
@@ -29,9 +31,7 @@ export default function DetalleProductos() {
     }
 
     const AgregarAlCarrito = () => {
-        console.log(producto)
         ObjetoCarrito.setCarrito(producto)
-        console.log(ObjetoCarrito)
     }
     return (
 
@@ -56,7 +56,8 @@ export default function DetalleProductos() {
                         <h2>Quedan: {producto.stock} Unidades</h2>
                         <div className='botones'>
                             <Button titulo={"Comprar"}></Button>
-                            <Button titulo={"Agregar al carrito"} onPress={AgregarAlCarrito}></Button>
+                            <Link to={'/Carrito'}><Button titulo={"Agregar al carrito"} onPress={AgregarAlCarrito}></Button></Link>
+                            
                         </div>
                         
                     </div>
