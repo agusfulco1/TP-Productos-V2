@@ -34,10 +34,10 @@ export default function Home() {
             })
     }, [])
 
-    const calcularDescuento = (producto)  => {
+    const calcularDescuento = (producto) => {
         let precio = producto.price
         let discount = producto.discountPercentage
-        const precioConDescuento = (Math.round(precio - (precio * discount/100)))
+        const precioConDescuento = (Math.round(precio - (precio * discount / 100)))
         return precioConDescuento
     }
 
@@ -46,9 +46,9 @@ export default function Home() {
             {isLoading ? null : (
                 <>
                     <div className='container'>
-                       <h1 className='titulo'>Bienvenidos a TechGlus</h1>
+                        <h1 className='titulo'>Bienvenidos a TechGlus</h1>
                     </div>
-                    
+
                     <div className='RowCarousel d-flex justify-content-center'>
                         <Carousel className='Carousel'>
                             <Carousel.Item className='boxFoto'>

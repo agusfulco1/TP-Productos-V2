@@ -31,7 +31,7 @@ export default function DetalleProductos() {
     }
 
     const AgregarAlCarrito = () => {
-        ObjetoCarrito.setCarrito(producto)
+        ObjetoCarrito.setCarrito([...ObjetoCarrito.carrito , producto])
     }
     return (
 

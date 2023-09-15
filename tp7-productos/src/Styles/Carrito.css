@@ -11,9 +11,16 @@
 }
 
 .containerCarrito {
+    width: 100%;
     margin-top: 10px;
     border: 1px solid black;
     height: 25%;
+    display: inline-flex;
+    justify-content: end;
+    align-items: center;
+}
+.containerImagen {
+    width: 100%;
 }
 .imagenProducto {
     height: 173px;

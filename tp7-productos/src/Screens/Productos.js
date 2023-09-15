@@ -25,7 +25,6 @@ export default function Productos() {
                 let productosArray = []
                 listaProductos.forEach(element => {
                     productosArray.push(element)
-                    console.log(productosArray)
                 });
                 setProductos(productosArray)
             })
