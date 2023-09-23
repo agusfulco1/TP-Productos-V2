@@ -8,7 +8,7 @@ export default function Carrito() {
     return (
         <>
         <div className='box2'>
-            <h1>Carrito</h1>
+            <h2>Carrito</h2>
             {!ObjetoCarrito.carrito.length ? <h1>No hay productos en el carrito</h1> : (
                 <div className="containerProductos">
                     {ObjetoCarrito.carrito.map((element) => {

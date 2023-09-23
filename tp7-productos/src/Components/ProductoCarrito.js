@@ -1,3 +1,4 @@
+import { propTypes } from 'react-bootstrap/esm/Image'
 import '../Styles/Carrito.css'
 import PropTypes from 'prop-types'
 export default function ProductoCarrito(ObjetoCarrito) {
@@ -19,4 +20,8 @@ export default function ProductoCarrito(ObjetoCarrito) {
             
         </div>
     )
+}
+
+ProductoCarrito.propTypes = {
+    ObjetoCarrito: PropTypes.object
 }
