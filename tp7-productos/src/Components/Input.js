@@ -1,4 +1,4 @@
-
+import PropTypes from 'prop-types'
 export default function Input(props) {
     return (
         <div className="containerInput">
@@ -6,4 +6,8 @@ export default function Input(props) {
             <input className='input' type="text" required size="50"></input>
         </div>
     )
+}
+
+Input.propTypes = {
+    titulo: PropTypes.string
 }

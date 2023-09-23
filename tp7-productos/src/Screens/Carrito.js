@@ -14,7 +14,10 @@ export default function Carrito() {
                     {ObjetoCarrito.carrito.map((element) => {
                         console.log(element)
                         return (
+                            <>
                             <ProductoCarrito ObjetoCarrito={element}></ProductoCarrito>
+                            </>
+                            
                         )
                     })}
                 </div>

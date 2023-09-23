@@ -1,4 +1,5 @@
 import '../Styles/Carrito.css'
+import PropTypes from 'prop-types'
 export default function ProductoCarrito(ObjetoCarrito) {
     return (
         <div className="containerCarrito">
@@ -15,8 +16,7 @@ export default function ProductoCarrito(ObjetoCarrito) {
                     <h2>{ObjetoCarrito.ObjetoCarrito.price}$</h2>
                 </div>
             </div>
-
-
+            
         </div>
     )
 }

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 
 export default function Button(props) {
     return (
@@ -6,4 +7,9 @@ export default function Button(props) {
         </>
         
     )
+}
+
+Button.propTypes = {
+    onPress: PropTypes.func,
+    titulo: PropTypes.string
 }

@@ -1,14 +1,12 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import Row from 'react-bootstrap/Row';
-import Card from 'react-bootstrap/Card';
 import '../Styles/Home.css'
 import Carousel from 'react-bootstrap/Carousel';
 import foto1 from '../Img/bg-showcase-1.jpg'
 import foto2 from '../Img/bg-showcase-2.jpg'
 import foto3 from '../Img/Gato.jpg'
 import Col from 'react-bootstrap/Col';
-import { Link } from 'react-router-dom'
 import Producto from '../Components/Producto';
 export default function Home() {
     const [destacados, setDestacados] = useState([])
@@ -45,9 +43,7 @@ export default function Home() {
         <div>
             {isLoading ? null : (
                 <>
-                    <div className='container'>
-                        <h1 className='titulo'>Bienvenidos a TechGlus</h1>
-                    </div>
+                    <h1 className='titulo'>Bienvenidos a TechGlus</h1>
 
                     <div className='RowCarousel d-flex justify-content-center'>
                         <Carousel className='Carousel'>
@@ -67,7 +63,7 @@ export default function Home() {
                         <Row md={3}>
                             {destacados.map((element) => {
                                 return (
-                                    <Col>
+                                    <Col key={element.id}>
                                         <Producto titulo={element.title} id={element.id} imagen={element.thumbnail} precio={element.price} producto={element} calcularDescuento={calcularDescuento}></Producto>
                                     </Col>
                                 )
