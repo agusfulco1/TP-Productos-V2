@@ -1,17 +1,20 @@
 import '../Styles/Carrito.css'
 import { CarritoContext } from '../Context/carritoContext';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import ProductoCarrito from '../Components/ProductoCarrito';
 export default function Carrito() {
-    const ObjetoCarrito = useContext(CarritoContext)
+    const [Carrito, setCarrito] = useState([])
+    useEffect(() => {
+        setCarrito(JSON.parse(localStorage.getItem("carrito")))
+    }, [])
     
     return (
         <>
         <div className='box2'>
             <h2>Carrito</h2>
-            {!ObjetoCarrito.carrito.length ? <h1>No hay productos en el carrito</h1> : (
+            {Carrito == null ? <h1>No hay productos en el carrito</h1> : (
                 <div className="containerProductos">
-                    {ObjetoCarrito.carrito.map((element) => {
+                    {Carrito.map((element) => {
                         console.log(element)
                         return (
                             <>
@@ -22,7 +25,6 @@ export default function Carrito() {
                     })}
                 </div>
             )}
-            
         </div>
         </>
         

@@ -33,6 +33,10 @@ export default function DetalleProductos() {
     const AgregarAlCarrito = () => {
         ObjetoCarrito.setCarrito([...ObjetoCarrito.carrito , producto])
     }
+
+    useEffect(() => {
+        localStorage.setItem("carrito", JSON.stringify(ObjetoCarrito.carrito))
+    }, [ObjetoCarrito.carrito])
     return (
 
         <div className='container'>
@@ -56,10 +60,8 @@ export default function DetalleProductos() {
                         <h2>Quedan: {producto.stock} Unidades</h2>
                         <div className='botones'>
                             <Button titulo={"Comprar"}></Button>
-                            <Link to={'/Carrito'}><Button titulo={"Agregar al carrito"} onPress={AgregarAlCarrito}></Button></Link>
-                            
+                            <Button titulo={"Agregar al carrito"} onPress={AgregarAlCarrito}></Button>
                         </div>
-                        
                     </div>
                 </div>
                 <div>
