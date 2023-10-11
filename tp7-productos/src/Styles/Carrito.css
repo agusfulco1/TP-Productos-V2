@@ -11,7 +11,6 @@
 
 .containerCarrito {
     width: 100%;
-    margin-top: 10px;
     border: 0px solid black;
     height: 25%;
     align-items: center;
@@ -27,5 +26,10 @@
 .textoCarrito {
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+.count {
+    display: flex;
+    flex-direction: row;
     align-items: center;
 }
