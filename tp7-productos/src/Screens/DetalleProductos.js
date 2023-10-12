@@ -18,7 +18,11 @@ export default function DetalleProductos() {
     useEffect(() => {
         axios.get('https://dummyjson.com/products/' + idProducto)
         .then(function (response) {
-            setProducto(response.data) 
+            const product = response.data
+            product.estaEnCarrito = false
+            product.cantidad = 0
+            console.log(product)
+            setProducto(product) 
         })
         .finally(() => setLoading(false))
     }, [])
@@ -31,7 +35,18 @@ export default function DetalleProductos() {
     }
 
     const AgregarAlCarrito = () => {
-        ObjetoCarrito.setCarrito([...ObjetoCarrito.carrito , producto])
+        if (!producto.estaEnCarrito) {
+            let product = producto
+            product.cantidad = 1
+            product.estaEnCarrito = true
+            ObjetoCarrito.setCarrito([...ObjetoCarrito.carrito , product])
+        }
+        else {
+            /*
+            let productoActualizado = ObjetoCarrito.carrito.filter((product) => product.id = producto.id)
+            productoActualizado.cantidad = productoActualizado.cantidad + 1
+            ObjetoCarrito.setCarrito([...ObjetoCarrito.carrito, productoActualizado])*/
+        }
     }
 
     useEffect(() => {

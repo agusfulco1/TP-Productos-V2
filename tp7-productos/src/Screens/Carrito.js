@@ -3,9 +3,11 @@ import { CarritoContext } from '../Context/carritoContext';
 import { useContext, useEffect, useState } from 'react';
 import ProductoCarrito from '../Components/ProductoCarrito';
 export default function Carrito() {
-    const [Carrito, setCarrito] = useState([])
+
+    const ObjetoCarrito = useContext(CarritoContext)
+
     useEffect(() => {
-        setCarrito(JSON.parse(localStorage.getItem("carrito")))
+        ObjetoCarrito.setCarrito(JSON.parse(localStorage.getItem("carrito")))
     }, [])
     
     return (
@@ -14,11 +16,10 @@ export default function Carrito() {
             <h2>Carrito</h2>
             {Carrito == null ? <h1>No hay productos en el carrito</h1> : (
                 <div className="containerProductos">
-                    {Carrito.map((element) => {
-                        console.log(element)
+                    {ObjetoCarrito.carrito.map((element) => {
                         return (
                             <>
-                            <ProductoCarrito ObjetoCarrito={element}></ProductoCarrito>
+                            <ProductoCarrito producto={element} ></ProductoCarrito>
                             </>
                             
                         )

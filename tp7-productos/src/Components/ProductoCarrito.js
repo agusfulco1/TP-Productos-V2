@@ -1,23 +1,37 @@
 import { propTypes } from 'react-bootstrap/esm/Image'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import '../Styles/Carrito.css'
 import PropTypes from 'prop-types'
-export default function ProductoCarrito(ObjetoCarrito) {
-    const [count, setCount] = useState(1)
-
+import { CarritoContext } from '../Context/carritoContext';
+export default function ProductoCarrito(producto) {
+    const ObjetoCarrito = useContext(CarritoContext)
     const restar = () => {
-        if (count > 1) {
-            setCount(count => count - 1)
+        if (producto.producto.cantidad > 1) {
+            ObjetoCarrito.setCarrito(ObjetoCarrito.carrito.map((product) => {
+                if (product.id === producto.producto.id) {
+                    product.cantidad = product.cantidad - 1
+                }
+                return product
+            }))
         }   
     }
 
     const sumar = () => {
-        setCount(count => count + 1)
+        console.log(ObjetoCarrito)
+        ObjetoCarrito.setCarrito(ObjetoCarrito.carrito.map((product) => {
+            console.log(product)
+            console.log(producto.producto)
+            if (product.id === producto.producto.id) {
+                product.cantidad = product.cantidad + 1
+                console.log(product.cantidad)
+            }
+            return product
+        }))
     }
 
     const calcularPrecio = () => {
-        let precio = ObjetoCarrito.ObjetoCarrito.price
-        let precioPorCarrito = precio * count
+        let precio = producto.producto.price
+        let precioPorCarrito = precio * producto.producto.cantidad
         return precioPorCarrito
     }
     return (
@@ -25,16 +39,16 @@ export default function ProductoCarrito(ObjetoCarrito) {
             <div className='row'>
                 <div className='col-md-2'>
                     <div className='containerImagen'>
-                        <img src={ObjetoCarrito.ObjetoCarrito.thumbnail} className="imagenProducto" alt='no hay imagen'></img>
+                        <img src={producto.producto.thumbnail} className="imagenProducto" alt='no hay imagen'></img>
                     </div>
                 </div>
                 <div className='col-md-6 textoCarrito'>
-                    <h2>{ObjetoCarrito.ObjetoCarrito.title}</h2>
+                    <h2>{producto.producto.title}</h2>
                 </div>
                 <div className='col-md-2 count'>
-                        <button onClick={sumar}>+</button>
-                        <h1>{count}</h1>
                         <button onClick={restar}>-</button>
+                        <h1>{producto.producto.cantidad}</h1>
+                        <button onClick={sumar}>+</button>
                 </div>
                 <div className='col-md-2 textoCarrito'>
                     <h2>{calcularPrecio()}$</h2>
