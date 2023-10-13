@@ -56,7 +56,7 @@ export default function Productos() {
                 <Row md={4} style={{marginTop: 10}}>
                     {isLoading ? null : (productos.map((element) => {
                         return (
-                            <Producto titulo={element.title} id={element.id} imagen={element.thumbnail} precio={element.price} producto={element} calcularDescuento={calcularDescuento}></Producto>
+                            <Producto producto={element} calcularDescuento={calcularDescuento}></Producto>
                         )
                     }))}
                 </Row>

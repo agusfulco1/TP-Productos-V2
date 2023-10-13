@@ -21,7 +21,6 @@ export default function DetalleProductos() {
             const product = response.data
             product.estaEnCarrito = false
             product.cantidad = 0
-            console.log(product)
             setProducto(product) 
         })
         .finally(() => setLoading(false))
@@ -42,10 +41,12 @@ export default function DetalleProductos() {
             ObjetoCarrito.setCarrito([...ObjetoCarrito.carrito , product])
         }
         else {
-            /*
-            let productoActualizado = ObjetoCarrito.carrito.filter((product) => product.id = producto.id)
-            productoActualizado.cantidad = productoActualizado.cantidad + 1
-            ObjetoCarrito.setCarrito([...ObjetoCarrito.carrito, productoActualizado])*/
+            ObjetoCarrito.setCarrito(ObjetoCarrito.carrito.map((product) => {
+                if (product.id === producto.id) {
+                    product.cantidad = product.cantidad + 1
+                }
+                return product
+            }))
         }
     }
 

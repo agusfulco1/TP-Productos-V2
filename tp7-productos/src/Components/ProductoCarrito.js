@@ -1,10 +1,11 @@
-import { propTypes } from 'react-bootstrap/esm/Image'
-import { useState, useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import '../Styles/Carrito.css'
 import PropTypes from 'prop-types'
 import { CarritoContext } from '../Context/carritoContext';
 export default function ProductoCarrito(producto) {
+
     const ObjetoCarrito = useContext(CarritoContext)
+    
     const restar = () => {
         if (producto.producto.cantidad > 1) {
             ObjetoCarrito.setCarrito(ObjetoCarrito.carrito.map((product) => {
@@ -17,16 +18,16 @@ export default function ProductoCarrito(producto) {
     }
 
     const sumar = () => {
-        console.log(ObjetoCarrito)
         ObjetoCarrito.setCarrito(ObjetoCarrito.carrito.map((product) => {
-            console.log(product)
-            console.log(producto.producto)
             if (product.id === producto.producto.id) {
                 product.cantidad = product.cantidad + 1
-                console.log(product.cantidad)
             }
             return product
         }))
+    }
+
+    const eliminarDelCarrito = () => {
+        ObjetoCarrito.setCarrito(ObjetoCarrito.carrito.filter(product => product.id !== producto.producto.id)) 
     }
 
     const calcularPrecio = () => {
@@ -52,6 +53,7 @@ export default function ProductoCarrito(producto) {
                 </div>
                 <div className='col-md-2 textoCarrito'>
                     <h2>{calcularPrecio()}$</h2>
+                    <button onClick={eliminarDelCarrito}>x</button>
                 </div>
             </div>
             

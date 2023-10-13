@@ -64,7 +64,7 @@ export default function Home() {
                             {destacados.map((element) => {
                                 return (
                                     <Col key={element.id}>
-                                        <Producto titulo={element.title} id={element.id} imagen={element.thumbnail} precio={element.price} producto={element} calcularDescuento={calcularDescuento}></Producto>
+                                        <Producto producto={element} calcularDescuento={calcularDescuento}></Producto>
                                     </Col>
                                 )
                             })}

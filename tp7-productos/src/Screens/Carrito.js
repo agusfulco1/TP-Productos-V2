@@ -7,6 +7,7 @@ export default function Carrito() {
     const ObjetoCarrito = useContext(CarritoContext)
 
     useEffect(() => {
+        console.log(ObjetoCarrito.carrito)
         ObjetoCarrito.setCarrito(JSON.parse(localStorage.getItem("carrito")))
     }, [])
     
@@ -14,9 +15,10 @@ export default function Carrito() {
         <>
         <div className='box2'>
             <h2>Carrito</h2>
-            {Carrito == null ? <h1>No hay productos en el carrito</h1> : (
+            {ObjetoCarrito.carrito == null ? <h1>No hay productos en el carrito</h1> : (
                 <div className="containerProductos">
                     {ObjetoCarrito.carrito.map((element) => {
+                        console.log(element)
                         return (
                             <>
                             <ProductoCarrito producto={element} ></ProductoCarrito>
